@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.Storage;
+//using Windows.Storage;
 
 namespace Launcher
 {
@@ -18,6 +18,9 @@ namespace Launcher
             string result = Assembly.GetExecutingAssembly().Location;
             int index = result.LastIndexOf("\\");
             string rootPath = $"{result.Substring(0, index)}\\..\\";
+
+            string[] lines = { result, index.ToString(), rootPath };
+            System.IO.File.WriteAllLines(@"C:\Users\xuejd1\WriteLines.txt", lines);
 
             // process object to keep track of your child process
             Process newProcess = null;
@@ -42,10 +45,10 @@ namespace Launcher
                     case "/mstsc":
                         Process.Start(@"mstsc.exe");
                         break;
-                    case "/parameters":
-                        string parameters = ApplicationData.Current.LocalSettings.Values["parameters"] as string;
-                        newProcess = Process.Start(rootPath + @"FullTrust_WPF\FullTrust_WPF.exe", parameters);
-                        break;
+                    //case "/parameters":
+                    //    string parameters = ApplicationData.Current.LocalSettings.Values["parameters"] as string;
+                    //    newProcess = Process.Start(rootPath + @"FullTrust_WPF\FullTrust_WPF.exe", parameters);
+                    //    break;
                 }
             }
         }
