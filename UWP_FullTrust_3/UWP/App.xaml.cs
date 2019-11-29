@@ -55,7 +55,9 @@ namespace UWP
         {
             base.OnBackgroundActivated(args);
 
-            if (args.TaskInstance.TriggerDetails is AppServiceTriggerDetails details)
+            object td = args.TaskInstance.TriggerDetails;
+
+            if (td is AppServiceTriggerDetails details)
             {
                 // only accept connections from callers in the same package
                 if (details.CallerPackageFamilyName == Package.Current.Id.FamilyName)
@@ -65,7 +67,7 @@ namespace UWP
                     args.TaskInstance.Canceled += OnTaskCanceled;
 
                     Connection = details.AppServiceConnection;
-                    AppServiceConnected?.Invoke(this, args.TaskInstance.TriggerDetails as AppServiceTriggerDetails);
+                    AppServiceConnected?.Invoke(this, td as AppServiceTriggerDetails);
                 }
             }
         }

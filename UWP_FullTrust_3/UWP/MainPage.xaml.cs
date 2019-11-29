@@ -54,7 +54,7 @@ namespace UWP
             App.Connection.RequestReceived += AppServiceConnection_RequestReceived;
             await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                // enable UI to access  the connection
+                // enable UI to access the connection
                 btnRegKey.IsEnabled = true;
             });
         }
